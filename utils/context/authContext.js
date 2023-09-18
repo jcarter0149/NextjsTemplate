@@ -36,10 +36,11 @@ const AuthProvider = (props) => {
         setOAuthUser(fbUser);
         checkUser(fbUser.uid).then((gamerInfo) => {
           let userObj = {};
-          if ('null' in gamerInfo) {
-            userObj = gamerInfo;
+          console.log(gamerInfo)
+          if (!gamerInfo) {
+            userObj = {fbUser, authed: false};
           } else {
-            userObj = { fbUser, uid: fbUser.uid, ...gamerInfo };
+            userObj = { fbUser, uid: fbUser.uid,  authed: true,  ...gamerInfo };
           }
           setUser(userObj);
         });
